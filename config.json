@@ -1,0 +1,26 @@
+{
+    "params": {
+        "local_server": "True",
+        "local_uri": "mysql://root:@127.0.0.1/blog_database",
+        "prod_uri": ""
+    },
+    "social_media": {
+        "youtube": "https://www.youtube.com/watch?v=J4sYkNBErpU&ab_channel=VikasDivyakirti",
+        "twitter": "https://www.twitter.com/",
+        "github": "https://github.com"
+    },
+    "mail_creds": {
+        "username": "shailendraupadhyayiitbhu@gmail.com",
+        "password": "dgqdejtxvdclukiv"
+    },
+    "admin_creds": {
+        "username": "username@gmail.com",
+        "password": "admin@123"
+    },
+    "posts_metadata": {
+        "n_posts": 1
+    },
+    "paths": {
+        "uploaded_files": "/home/shailendra/learning/rest_api/static/assets/uploaded_images"
+    }
+}
