@@ -69,6 +69,7 @@ class Posts(db.Model):
 
 @app.route('/')
 def home():
+    """Returns all the posts in the database but with the help of the pagination."""
     # Pagination Logic
     #First Page : prev =# next=page+1
     #Middle Page : prev = page-1 next = page+1
@@ -102,6 +103,7 @@ def home():
 
 @app.route('/login', methods=['GET','POST'])
 def login():
+    """Login for the admin panel where the user can edit and delete posts."""
 
     if 'user' in session and session['user'] == config['admin_creds']['username'] :
         posts = Posts.query.all()
@@ -121,17 +123,20 @@ def login():
 
 @app.route('/logout')
 def logout():
+    """Log out from the admin panel."""
     session.pop('user', None)
     return redirect('/login')
 
 
 @app.route('/about')
 def about():
+    """About the website."""
     return render_template('about.html', param=social_handels)
 
 @app.route('/post')
 @app.route('/post/<string:post_slug>' , methods=['GET'])
 def post_route(post_slug=''):
+    """return the post based on the slug"""
     if post_slug == '':
         post = Posts.query.filter_by(title='skills').first()
         return render_template('post.html', post=post, param=social_handels)
@@ -141,6 +146,7 @@ def post_route(post_slug=''):
 
 @app.route('/contact', methods=['GET','POST'])
 def contact():
+    """Contact form for the users. """
     if(request.method=='POST'):
         # add entry to the database
         name = request.form.get('name')
@@ -166,6 +172,7 @@ def contact():
 
 @app.route('/edit/<string:s_no>', methods=['POST','GET'])
 def edit_post(s_no):
+    """Edit a post and saving it to the database."""
     if 'user' in session and session['user'] == config['admin_creds']['username'] :
         if request.method == 'POST':
                 box_title = request.form.get('title')
@@ -200,6 +207,7 @@ def edit_post(s_no):
 
 @app.route('/delete/<string:s_no>',methods=['GET'])
 def delete(s_no):
+    """Delete a post."""
     if 'user' in session and session['user'] == config['admin_creds']['username'] :
         Posts.query.filter(Posts.sno==s_no).delete()
         db.session.commit()
@@ -214,6 +222,7 @@ def delete(s_no):
 
 @app.route("/uploader",methods=['POST', 'GET'])
 def uploader():
+    """File Uploader"""
     if 'user' in session and session['user'] == config['admin_creds']['username'] :
         if request.method == 'POST':
             file = request.files['file1']
